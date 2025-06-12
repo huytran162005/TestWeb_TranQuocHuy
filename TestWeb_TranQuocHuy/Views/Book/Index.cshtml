@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Book>
+
+@if (TempData["success"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["success"]
+    </div>
+}
+
+<a asp-action="Add" class="btn btn-primary mb-3">Thêm Sách</a>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Mã sách</th>
+            <th>Tên sách</th>
+            <th>Giá bìa</th>
+            <th>Số lượng</th>
+            <th>Tác vụ</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var book in Model)
+        {
+            <tr>
+                <td>@book.Id</td>
+                <td>@book.Title</td>
+                <td>@book.Price.ToString("N0") VNĐ</td>
+                <td>@book.Quantilty</td>
+                <td>
+                    
+                    <a asp-action="Update" asp-route-id="@book.Id" class="btn btn-success mx-1">
+                        <i class="bi bi-pencil-square"></i> Sửa
+                    </a>
+                    
+                    <a asp-action="Delete" asp-route-id="@book.Id" class="btn btn-danger mx-1">
+                        <i class="bi bi-trash"></i> Xóa
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
